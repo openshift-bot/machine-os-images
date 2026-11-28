@@ -1,4 +1,4 @@
-FROM registry.ci.openshift.org/ocp/5.1:installer AS builder
+FROM registry.ci.openshift.org/ocp/5.2:installer AS builder
 
 ARG DIRECT_DOWNLOAD=false
 ARG COREOS_VERSIONS=9,10
@@ -14,8 +14,8 @@ RUN dnf install -y jq wget coreos-installer
 COPY fetch_image.sh /usr/local/bin/
 RUN /usr/local/bin/fetch_image.sh
 
-FROM registry.ci.openshift.org/ocp/5.1:cli AS cli
-FROM registry.ci.openshift.org/ocp/5.0:base-rhel9
+FROM registry.ci.openshift.org/ocp/5.2:cli AS cli
+FROM registry.ci.openshift.org/ocp/5.2:base-rhel9
 
 RUN dnf install -y jq && dnf clean all && rm -rf /var/cache/*
 
